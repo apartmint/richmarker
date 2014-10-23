@@ -1,0 +1,11 @@
+{
+  "name": "richmarker",
+  "version": "1.0.0",
+  "keywords": ["richmarker", "google", "maps"],
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "main": "src/richmarker.js",
+  "ignore": [  ]
+}
