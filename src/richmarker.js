@@ -55,6 +55,10 @@ function RichMarker(opt_options) {
     opt_options['anchor'] = RichMarkerPosition['BOTTOM'];
   }
 
+  if (opt_options['offsetSize'] == undefined) {
+    opt_options['offsetSize'] = 0;
+  }
+
   this.setValues(options);
 }
 RichMarker.prototype = new google.maps.OverlayView();
@@ -160,6 +164,27 @@ RichMarker.prototype.getShadow = function() {
   return /** @type {string} */ (this.get('shadow'));
 };
 RichMarker.prototype['getShadow'] = RichMarker.prototype.getShadow;
+
+/**
+ * Sets the marker's offsetSize.
+ *
+ * @param {int} offsetSize The offset size to set.
+ */
+RichMarker.prototype.setOffsetSize = function(offsetSize) {
+  this.set('offsetSize', offsetSize);
+};
+RichMarker.prototype['offsetSize'] = RichMarker.prototype.offsetSize;
+
+
+/**
+ * Gets the marker's offsetSize.
+ *
+ * @return {int} The offset size.
+ */
+RichMarker.prototype.getOffsetSize = function() {
+  return /** @type {int} */ (this.get('offsetSize'));
+};
+RichMarker.prototype['offsetSize'] = RichMarker.prototype.offsetSize;
 
 
 /**
@@ -667,8 +692,8 @@ RichMarker.prototype.getOffset_ = function() {
     return offset;
   }
 
-  var width = this.markerContent_.offsetWidth;
-  var height = this.markerContent_.offsetHeight;
+  var width = this.getOffsetSize();
+  var height = this.getOffsetSize();
 
   switch (anchor) {
    case RichMarkerPosition['TOP_LEFT']:
@@ -776,8 +801,8 @@ RichMarker.prototype.draw = function() {
   this.markerWrapper_.style['top'] = (pos.y + offset.height) + 'px';
   this.markerWrapper_.style['left'] = (pos.x + offset.width) + 'px';
 
-  var height = this.markerContent_.offsetHeight;
-  var width = this.markerContent_.offsetWidth;
+  var width = this.getOffsetSize();
+  var height = this.getOffsetSize();
 
   if (width != this.get('width')) {
     this.set('width', width);
